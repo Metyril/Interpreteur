@@ -7,6 +7,11 @@ Symbole(s.getChaine()) {
   if (s == "<ENTIER>") {
     m_valeur = atoi(s.getChaine().c_str()); // c_str convertit une string en char*
     m_defini = true;
+<<<<<<< HEAD
+=======
+  } else if (s == "<CHAINE>"){
+      m_defini = true;
+>>>>>>> ba3a01a8b78b76aa58cdd087e7bf1990609a5099
   } else {
     m_defini = false;
   }

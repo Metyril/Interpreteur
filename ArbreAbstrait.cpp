@@ -3,6 +3,10 @@
 #include "Symbole.h"
 #include "SymboleValue.h"
 #include "Exceptions.h"
+<<<<<<< HEAD
+=======
+#include <typeinfo> 
+>>>>>>> ba3a01a8b78b76aa58cdd087e7bf1990609a5099
 
 ////////////////////////////////////////////////////////////////////////////////
 // NoeudSeqInst
@@ -75,6 +79,7 @@ NoeudInstSi::NoeudInstSi(Noeud* condition, Noeud* sequence)
 : m_condition(condition), m_sequence(sequence) {
 }
 
+<<<<<<< HEAD
 /*void NoeudInstSi::traduitEnCPP(ostream cout("traduction.cpp"),unsigned int indentation) const{
     cout << setw(4*indentation) << "" << "if (";// Ecrit "if (" avec un décalage de 4*indentation espaces
     m_condition->traduitEnCPP(cout,0);// Traduit la condition en C++ sans décalage
@@ -90,6 +95,21 @@ int NoeudInstSi::executer() {
 }
 
 
+=======
+int NoeudInstSi::executer() {
+  if (m_condition->executer()) m_sequence->executer();
+  return 0; // La valeur renvoyée ne représente rien !
+}
+
+
+
+
+
+
+
+
+
+>>>>>>> ba3a01a8b78b76aa58cdd087e7bf1990609a5099
 ////////////////////////////////////////////////////////////////////////////////
 // NoeudInstTantQue
 ////////////////////////////////////////////////////////////////////////////////
@@ -165,6 +185,7 @@ int NoeudInstPour::executer() {
 }
 
 
+<<<<<<< HEAD
 ////////////////////////////////////////////////////////////////////////////////
 // NoeudLire
 ////////////////////////////////////////////////////////////////////////////////
@@ -183,4 +204,50 @@ int NoeudInstLire::executer() {
         ((SymboleValue*) m_variables[i])->setValeur(valeur);
     }
   return 0; // La valeur renvoyée ne représente rien !
+=======
+
+
+////////////////////////////////////////////////////////////////////////////////
+// NoeudChaine
+////////////////////////////////////////////////////////////////////////////////
+
+NoeudChaine::NoeudChaine(Noeud* chaine) 
+:m_chaine(chaine){
+
+}
+
+int NoeudChaine::executer() {
+    /*if (typeid(*m_chaine)==typeid(SymboleValue) && *((SymboleValue*)m_chaine)== "<CHAINE>" ) {
+        cout << ((SymboleValue *)m_chaine)->getChaine();
+    }else if (typeid(*m_chaine)==typeid(SymboleValue) && *((SymboleValue*)m_chaine)== "<ENTIER>" ) {
+        cout << ((SymboleValue *)m_chaine)->getChaine();
+    }*/
+    
+    cout << ((SymboleValue *)m_chaine)->getChaine();
+    
+    return 0; // La valeur renvoyée ne représente rien !
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// NoeudInstEcrire
+////////////////////////////////////////////////////////////////////////////////
+
+NoeudInstEcrire::NoeudInstEcrire(vector<Noeud*> aecrire)
+:m_aecrire(aecrire){}
+
+
+int NoeudInstEcrire::executer() {
+   for(int i = 0; i < m_aecrire.size(); i++){
+            //cout << m_sequence;
+       if (typeid(*m_aecrire[i])==typeid(NoeudChaine)){
+            m_aecrire[i]->executer();
+            cout <<" ";
+       }else {
+            cout << (m_aecrire[i]->executer()) << " ";
+       }
+    } 
+        
+
+    return 0; // La valeur renvoyée ne représente rien !
+>>>>>>> ba3a01a8b78b76aa58cdd087e7bf1990609a5099
 }

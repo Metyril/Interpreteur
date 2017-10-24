@@ -57,7 +57,11 @@ Noeud* Interpreteur::seqInst() {
   NoeudSeqInst* sequence = new NoeudSeqInst();
   do {
     sequence->ajoute(inst());
+<<<<<<< HEAD
   } while (m_lecteur.getSymbole() == "<VARIABLE>" || m_lecteur.getSymbole() == "si" || m_lecteur.getSymbole() == "tantque" || m_lecteur.getSymbole() == "repeter" || m_lecteur.getSymbole() == "pour" || m_lecteur.getSymbole() == "lire");
+=======
+  } while (m_lecteur.getSymbole() == "<VARIABLE>" || m_lecteur.getSymbole() == "si" || m_lecteur.getSymbole() == "tantque" || m_lecteur.getSymbole() == "repeter" || m_lecteur.getSymbole() == "pour" || m_lecteur.getSymbole() == "ecrire" );
+>>>>>>> ba3a01a8b78b76aa58cdd087e7bf1990609a5099
   // Tant que le symbole courant est un début possible d'instruction...
   // Il faut compléter cette condition chaque fois qu'on rajoute une nouvelle instruction
   return sequence;
@@ -65,6 +69,7 @@ Noeud* Interpreteur::seqInst() {
 
 Noeud* Interpreteur::inst() {
   // <inst> ::= <affectation>  ; | <instSi>
+<<<<<<< HEAD
   try {
     if (m_lecteur.getSymbole() == "<VARIABLE>") {
       Noeud *affect = affectation();
@@ -90,12 +95,35 @@ Noeud* Interpreteur::inst() {
       Noeud* sequence = seqInst();
       exit(-1);
   }
+=======
+  if (m_lecteur.getSymbole() == "<VARIABLE>") {
+    Noeud *affect = affectation();
+    testerEtAvancer(";");
+    return affect;
+  }
+  else if (m_lecteur.getSymbole() == "si")
+    return instSiRiche();
+  // Compléter les alternatives chaque fois qu'on rajoute une nouvelle instruction
+  else if (m_lecteur.getSymbole() == "tantque")
+      return instTantQue();
+  else if (m_lecteur.getSymbole() == "repeter")
+      return instRepeter();
+  else if (m_lecteur.getSymbole() == "pour")
+      return instPour();
+  else if (m_lecteur.getSymbole() == "ecrire")
+      return instEcrire();
+  else erreur("Instruction incorrecte");
+>>>>>>> ba3a01a8b78b76aa58cdd087e7bf1990609a5099
 }
 
 Noeud* Interpreteur::affectation() {
   // <affectation> ::= <variable> = <expression> 
   tester("<VARIABLE>");
+<<<<<<< HEAD
   Noeud* var = m_table.chercheAjoute(m_lecteur.getSymbole()); // La variable est ajoutée à la table et on la mémorise
+=======
+  Noeud* var = m_table.chercheAjoute(m_lecteur.getSymbole()); // La variable est ajoutée à la table eton la mémorise
+>>>>>>> ba3a01a8b78b76aa58cdd087e7bf1990609a5099
   m_lecteur.avancer();
     testerEtAvancer("=");
     Noeud* exp = expression();             // On mémorise l'expression trouvée
@@ -115,15 +143,25 @@ Noeud* Interpreteur::expression() {
     Symbole operateur = m_lecteur.getSymbole(); // On mémorise le symbole de l'opérateur
     m_lecteur.avancer();
     Noeud* factDroit = facteur(); // On mémorise l'opérande droit
+<<<<<<< HEAD
     fact = new NoeudOperateurBinaire(operateur, fact, factDroit); // Et on construit un noeud opérateur binaire
+=======
+    fact = new NoeudOperateurBinaire(operateur, fact, factDroit); // Et on construuit un noeud opérateur binaire
+>>>>>>> ba3a01a8b78b76aa58cdd087e7bf1990609a5099
   }
   return fact; // On renvoie fact qui pointe sur la racine de l'expression
 }
 
 Noeud* Interpreteur::facteur() {
+<<<<<<< HEAD
   // <facteur> ::= <entier> | <variable> | - <facteur> | non <facteur> | ( <expression> )
   Noeud* fact = nullptr;
   if (m_lecteur.getSymbole() == "<VARIABLE>" || m_lecteur.getSymbole() == "<ENTIER>") {
+=======
+  // <facteur> ::= <entier> | <variable> | - <facteur> | non <facteur> | ( <expression> ) | <chaine>
+  Noeud* fact = nullptr;
+  if (m_lecteur.getSymbole() == "<VARIABLE>" || m_lecteur.getSymbole() == "<ENTIER>" || m_lecteur.getSymbole() == "<CHAINE>") {
+>>>>>>> ba3a01a8b78b76aa58cdd087e7bf1990609a5099
     fact = m_table.chercheAjoute(m_lecteur.getSymbole()); // on ajoute la variable ou l'entier à la table
     m_lecteur.avancer();
   } else if (m_lecteur.getSymbole() == "-") { // - <facteur>
@@ -138,7 +176,11 @@ Noeud* Interpreteur::facteur() {
     m_lecteur.avancer();
     fact = expression();
     testerEtAvancer(")");
+<<<<<<< HEAD
   } else
+=======
+  } else 
+>>>>>>> ba3a01a8b78b76aa58cdd087e7bf1990609a5099
     erreur("Facteur incorrect");
   return fact;
 }
@@ -258,6 +300,7 @@ Noeud* Interpreteur::instSiRiche() {
     
     testerEtAvancer("finsi");
     return new NoeudInstSiRiche(conditions, sequences);
+<<<<<<< HEAD
 }
 
 Noeud* Interpreteur::instLire() {
@@ -281,3 +324,37 @@ Noeud* Interpreteur::instLire() {
     testerEtAvancer(")");
     return new NoeudInstLire(variables);
 }
+=======
+}   
+
+Noeud* Interpreteur::instEcrire() {
+    vector <Noeud* > aecrire;
+    
+    // <instEcrire> ::=ecrire( <expression> | <chaine> {, <expression> | <chaine> })    
+    testerEtAvancer("ecrire");
+    testerEtAvancer("(");
+    
+    
+    if(m_lecteur.getSymbole() == "<CHAINE>" || m_lecteur.getSymbole() == "<ENTIER>" ){
+        NoeudChaine* chaine = new NoeudChaine(expression()); // On mémorise la chaine
+        aecrire.push_back(chaine);
+    } else if (m_lecteur.getSymbole() == "<VARIABLE>" ){
+        Noeud* expr = expression(); // On mémorise la condition
+        aecrire.push_back(expr);
+    }
+    
+    while(m_lecteur.getSymbole() != ")"){
+        testerEtAvancer(",");
+       if(m_lecteur.getSymbole() == "<CHAINE>" || m_lecteur.getSymbole() == "<ENTIER>" ){
+            NoeudChaine* chaine = new NoeudChaine(expression()); // On mémorise la chaine
+            aecrire.push_back(chaine);
+        } else if (m_lecteur.getSymbole() == "<VARIABLE>" ){
+            Noeud* expr = expression(); // On mémorise la condition
+            aecrire.push_back(expr);
+        }
+    }
+    
+    testerEtAvancer(")");
+    return new NoeudInstEcrire(aecrire);
+}
+>>>>>>> ba3a01a8b78b76aa58cdd087e7bf1990609a5099

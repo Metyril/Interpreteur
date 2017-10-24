@@ -71,12 +71,19 @@ class NoeudInstSi : public Noeud {
 // Classe pour représenter un noeud "instruction si"
 //  et ses 2 fils : la condition du si et la séquence d'instruction associée
   public:
+<<<<<<< HEAD
    NoeudInstSi(Noeud* condition, Noeud* sequence);
    // Construit une "instruction si" avec sa condition et sa séquence d'instruction
    ~NoeudInstSi() {} // A cause du destructeur virtuel de la classe Noeud
    //void traduitEnCPP(ostream & cout, unsigned int indentation) const;
    int executer();  // Exécute l'instruction si : si condition vraie on exécute la séquence
 //   void traduitEnCPP(ostream cout("traduction.cpp"),unsigned int indentation) const;
+=======
+    NoeudInstSi(Noeud* condition, Noeud* sequence);
+     // Construit une "instruction si" avec sa condition et sa séquence d'instruction
+   ~NoeudInstSi() {} // A cause du destructeur virtuel de la classe Noeud
+    int executer();  // Exécute l'instruction si : si condition vraie on exécute la séquence
+>>>>>>> ba3a01a8b78b76aa58cdd087e7bf1990609a5099
 
   private:
     Noeud*  m_condition;
@@ -96,11 +103,19 @@ class NoeudInstSi : public Noeud {
 ////////////////////////////////////////////////////////////////////////////////
 class NoeudInstTantQue : public Noeud {
 // Classe pour représenter un noeud "instruction tantque"
+<<<<<<< HEAD
+=======
+//  et ses 2 fils : la condition du si et la séquence d'instruction associée
+>>>>>>> ba3a01a8b78b76aa58cdd087e7bf1990609a5099
   public:
     NoeudInstTantQue(Noeud* condition, Noeud* sequence);
      // Construit une "instruction tantque" avec sa condition et sa séquence d'instruction
    ~NoeudInstTantQue() {} // A cause du destructeur virtuel de la classe Noeud
+<<<<<<< HEAD
     int executer();  // Exécute l'instruction tantque
+=======
+    int executer();  // Exécute l'instruction si : si condition vraie on exécute la séquence
+>>>>>>> ba3a01a8b78b76aa58cdd087e7bf1990609a5099
 
   private:
     Noeud*  m_condition;
@@ -111,11 +126,19 @@ class NoeudInstTantQue : public Noeud {
 ////////////////////////////////////////////////////////////////////////////////
 class NoeudInstSiRiche : public Noeud {
 // Classe pour représenter un noeud "instruction siRiche"
+<<<<<<< HEAD
+=======
+//  et ses 2 fils : la condition du si et la séquence d'instruction associée
+>>>>>>> ba3a01a8b78b76aa58cdd087e7bf1990609a5099
   public:
     NoeudInstSiRiche(vector<Noeud* > conditions, vector<Noeud* > sequences);
      // Construit une "instruction si" avec sa condition et sa séquence d'instruction
    ~NoeudInstSiRiche() {} // A cause du destructeur virtuel de la classe Noeud
+<<<<<<< HEAD
     int executer();  // Exécute l'instruction siRiche
+=======
+    int executer();  // Exécute l'instruction si : si condition vraie on exécute la séquence
+>>>>>>> ba3a01a8b78b76aa58cdd087e7bf1990609a5099
 
   private:
     vector<Noeud* >  m_conditions;
@@ -128,11 +151,19 @@ class NoeudInstSiRiche : public Noeud {
 ////////////////////////////////////////////////////////////////////////////////
 class NoeudInstRepeter : public Noeud {
 // Classe pour représenter un noeud "instruction repeter"
+<<<<<<< HEAD
+=======
+//  et ses 2 fils : la condition du si et la séquence d'instruction associée
+>>>>>>> ba3a01a8b78b76aa58cdd087e7bf1990609a5099
   public:
     NoeudInstRepeter(Noeud* condition, Noeud* sequence);
      // Construit une "instruction repeter" avec sa condition et sa séquence d'instruction
    ~NoeudInstRepeter() {} // A cause du destructeur virtuel de la classe Noeud
+<<<<<<< HEAD
     int executer();  // Exécute l'instruction repeter
+=======
+    int executer();  // Exécute l'instruction si : si condition vraie on exécute la séquence
+>>>>>>> ba3a01a8b78b76aa58cdd087e7bf1990609a5099
 
   private:
     Noeud*  m_condition;
@@ -143,11 +174,19 @@ class NoeudInstRepeter : public Noeud {
 ////////////////////////////////////////////////////////////////////////////////
 class NoeudInstPour : public Noeud {
 // Classe pour représenter un noeud "instruction pour"
+<<<<<<< HEAD
+=======
+//  et ses 2 fils : la condition du si et la séquence d'instruction associée
+>>>>>>> ba3a01a8b78b76aa58cdd087e7bf1990609a5099
   public:
     NoeudInstPour(Noeud* condition, Noeud* sequence, Noeud* affect = nullptr, Noeud* affectation = nullptr);
      // Construit une "instruction pour" avec sa condition et sa séquence d'instruction
    ~NoeudInstPour() {} // A cause du destructeur virtuel de la classe Noeud
+<<<<<<< HEAD
     int executer();  // Exécute l'instruction pour
+=======
+    int executer();  // Exécute l'instruction si : si condition vraie on exécute la séquence
+>>>>>>> ba3a01a8b78b76aa58cdd087e7bf1990609a5099
 
   private:
     Noeud*  m_condition;
@@ -158,6 +197,7 @@ class NoeudInstPour : public Noeud {
 
 
 ////////////////////////////////////////////////////////////////////////////////
+<<<<<<< HEAD
 class NoeudInstLire : public Noeud {
 // Classe pour représenter un noeud "instruction lire"
   public:
@@ -170,4 +210,33 @@ class NoeudInstLire : public Noeud {
     vector<Noeud*>  m_variables;
 };
 
+=======
+class NoeudInstEcrire : public Noeud {
+// Classe pour représenter un noeud "instruction ecrire"
+//  et ses 2 fils : la condition du si et la séquence d'instruction associée
+  public:
+    NoeudInstEcrire(vector<Noeud* > aecrire);
+     // Construit une "instruction ecrire" avec sa condition et sa séquence d'instruction
+   ~NoeudInstEcrire() {} // A cause du destructeur virtuel de la classe Noeud
+    int executer();  // Exécute l'instruction si : si condition vraie on exécute la séquence
+
+  private:
+    vector<Noeud*>  m_aecrire;
+};
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+class NoeudChaine : public Noeud {
+// Classe pour représenter un noeud "affectation"
+//  composé de 2 fils : la variable et l'expression qu'on lui affecte
+  public:
+     NoeudChaine(Noeud* chaine); // construit une affectation
+    ~NoeudChaine() {} // A cause du destructeur virtuel de la classe Noeud
+    int executer();        // Exécute (évalue) l'expression et affecte sa valeur à la variable
+
+  private:
+    Noeud* m_chaine;
+};
+>>>>>>> ba3a01a8b78b76aa58cdd087e7bf1990609a5099
 #endif /* ARBREABSTRAIT_H */

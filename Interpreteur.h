@@ -42,12 +42,21 @@ private:
     
     
     // RAJOUTER
+<<<<<<< HEAD
     Noeud* instTantQue();   //      <instTantQue> ::= tantque ( <expression> ) <seqInst> fintantque
     Noeud* instRepeter();   // <instRepeter> ::= repeter <seqInst> jusqua( <expression> )
     Noeud* instPour();      // <instPour>   ::=pour( [ <affectation> ] ; <expression> ;[ <affectation> ]) <seqInst> finpour
     Noeud* instSiRiche();   //      <instSiRiche> ::= si ( <expression> ) <seqInst> {sinonsi ( <expression> ) <seqInst>} [sinon ( <expression> ) <seqInst>] finsi
     Noeud* instLire();      // <instLire> ::= lire( <variable> {, <variable> })
 
+=======
+    Noeud* instTantQue();   // <instTantQue> ::= tantque ( <expression> ) <seqInst> fintantque
+    Noeud* instRepeter();   // <instRepeter> ::= repeter <seqInst> jusqua( <expression> )
+    Noeud* instPour();      // <instPour>   ::=pour( [ <affectation> ] ; <expression> ;[ <affectation> ]) <seqInst> finpour
+    Noeud* instSiRiche();   // <instSiRiche> ::= si ( <expression> ) <seqInst> {sinonsi ( <expression> ) <seqInst>} [sinon ( <expression> ) <seqInst>] finsi
+    Noeud* instEcrire();    // <instEcrire> ::=ecrire( <expression> | <chaine> {, <expression> | <chaine> })    
+    
+>>>>>>> ba3a01a8b78b76aa58cdd087e7bf1990609a5099
     
     
     
