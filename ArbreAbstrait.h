@@ -76,7 +76,7 @@ class NoeudInstSi : public Noeud {
    ~NoeudInstSi() {} // A cause du destructeur virtuel de la classe Noeud
    //void traduitEnCPP(ostream & cout, unsigned int indentation) const;
    int executer();  // Exécute l'instruction si : si condition vraie on exécute la séquence
-   void traduitEnCPP(ostream cout("traduction.cpp"),unsigned int indentation) const;
+//   void traduitEnCPP(ostream cout("traduction.cpp"),unsigned int indentation) const;
 
   private:
     Noeud*  m_condition;

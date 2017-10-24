@@ -75,13 +75,13 @@ NoeudInstSi::NoeudInstSi(Noeud* condition, Noeud* sequence)
 : m_condition(condition), m_sequence(sequence) {
 }
 
-void NoeudInstSi::traduitEnCPP(ostream cout("traduction.cpp"),unsigned int indentation) const{
+/*void NoeudInstSi::traduitEnCPP(ostream cout("traduction.cpp"),unsigned int indentation) const{
     cout << setw(4*indentation) << "" << "if (";// Ecrit "if (" avec un décalage de 4*indentation espaces
     m_condition->traduitEnCPP(cout,0);// Traduit la condition en C++ sans décalage
     cout << ") {" << endl;// Ecrit ") {" et passe à la ligne
     m_sequence->traduitEnCPP(cout, indentation+1);// Traduit en C++ la séquence avec indentation augmentée
     cout << setw(4*indentation)<<""<<"}"<< endl;// Ecrit "}" avec l'indentation initiale et passe à la ligne    
-}
+}*/
 
 int NoeudInstSi::executer() {
     if (m_condition->executer())
