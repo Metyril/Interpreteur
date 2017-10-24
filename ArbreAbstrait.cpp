@@ -176,11 +176,13 @@ NoeudChaine::NoeudChaine(Noeud* chaine)
 }
 
 int NoeudChaine::executer() {
-    if (typeid(*m_chaine)==typeid(SymboleValue) && *((SymboleValue*)m_chaine)== "<CHAINE>" ) {
+    /*if (typeid(*m_chaine)==typeid(SymboleValue) && *((SymboleValue*)m_chaine)== "<CHAINE>" ) {
         cout << ((SymboleValue *)m_chaine)->getChaine();
     }else if (typeid(*m_chaine)==typeid(SymboleValue) && *((SymboleValue*)m_chaine)== "<ENTIER>" ) {
         cout << ((SymboleValue *)m_chaine)->getChaine();
-    }
+    }*/
+    
+    cout << ((SymboleValue *)m_chaine)->getChaine();
     
     return 0; // La valeur renvoyée ne représente rien !
 }

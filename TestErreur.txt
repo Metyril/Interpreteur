@@ -1,8 +1,9 @@
 # Fichier de test
 # Les lignes de commentaires commencent par #
 procedure principale()
-i=3;
-ecrire(600000000000000000000)
-
+  i = 12+3;
+  sip (i>14)
+    j=1;
+  finsi
 finproc
 # Commentaire Final
