@@ -158,6 +158,18 @@ class NoeudInstPour : public Noeud {
     Noeud*  m_affec2;
 };
 
+////////////////////////////////////////////////////////////////////////////////
+class NoeudInstLire : public Noeud {
+// Classe pour représenter un noeud "instruction lire"
+  public:
+    NoeudInstLire(vector<Noeud*> variables);
+     // Construit une "instruction repeter" avec sa condition et sa séquence d'instruction
+   ~NoeudInstLire() {} // A cause du destructeur virtuel de la classe Noeud
+    int executer();  // Exécute l'instruction lire
+
+  private:
+    vector<Noeud*>  m_variables;
+};
 
 ////////////////////////////////////////////////////////////////////////////////
 class NoeudInstEcrire : public Noeud {
