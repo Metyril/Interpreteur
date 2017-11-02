@@ -276,6 +276,15 @@ int NoeudInstLire::executer() {
   return 0; // La valeur renvoyée ne représente rien !
 }
 
+void NoeudInstLire::traduitEnCPP(ostream & cout, unsigned int indentation) const{
+
+    for(int i =0; i<m_variables.size(); i++){
+        cout << setw(4*indentation)<<""<<"cin >> "; // Ecrit "cout <<" avec un décalage de 4*indentation espaces
+        m_variables[i]->traduitEnCPP(cout, indentation);
+        cout << ";" << endl;
+    }
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 // NoeudInstEcrire
 ////////////////////////////////////////////////////////////////////////////////
