@@ -47,7 +47,7 @@ private:
     Noeud* instPour();      // <instPour>   ::=pour( [ <affectation> ] ; <expression> ;[ <affectation> ]) <seqInst> finpour
     Noeud* instSiRiche();   // <instSiRiche> ::= si ( <expression> ) <seqInst> {sinonsi ( <expression> ) <seqInst>} [sinon ( <expression> ) <seqInst>] finsi
     Noeud* instEcrire();    // <instEcrire> ::=ecrire( <expression> | <chaine> {, <expression> | <chaine> })    
-    
+    Noeud* instLire();      // <instLire> ::= lire( <variable> {, <variable> })
     
     
     
