@@ -188,6 +188,26 @@ int NoeudChaine::executer() {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+// NoeudLire
+////////////////////////////////////////////////////////////////////////////////
+
+NoeudInstLire::NoeudInstLire(vector<Noeud*> variables)
+: m_variables(variables){
+}
+
+
+int NoeudInstLire::executer() {
+    int valeur;
+    for(int i = 0; i < m_variables.size(); i++) {
+        cout << "Variable : ";
+        cin >> valeur;
+        cout << endl;
+        ((SymboleValue*) m_variables[i])->setValeur(valeur);
+    }
+  return 0; // La valeur renvoyée ne représente rien !
+}
+
+////////////////////////////////////////////////////////////////////////////////
 // NoeudInstEcrire
 ////////////////////////////////////////////////////////////////////////////////
 
