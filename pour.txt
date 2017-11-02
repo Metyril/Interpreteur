@@ -1,6 +1,13 @@
 # Fichier de test
 # Les lignes de commentaires commencent par #
 procedure principale()
-i = 15;
-ecrire(i);
+
+j = 0;
+
+pour(i=3;i<5;)
+j=j+1;
+i=i+1;
+finpour
+
+finproc
 # Commentaire Final

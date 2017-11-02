@@ -214,21 +214,23 @@ int NoeudInstPour::executer() {
    for(m_affec1 != nullptr ? m_affec1->executer() : 0 ; m_condition->executer(); m_affec2 != nullptr ? m_affec2->executer() : 0 ){
             //cout << m_sequence;
             m_sequence->executer();
-            cout << "fin";
         } 
-        
-
     return 0; // La valeur renvoyée ne représente rien !
 }
 
 void NoeudInstPour::traduitEnCPP(ostream& cout, unsigned int indentation) const {
     cout << setw(4*indentation)<<""<<"for("; // Ecrit "for (" avec un décalage de 4*indentation espaces 
-    m_affec1->traduitEnCPP(cout,0);//traduit la première affectation en C++
-    cout << ";";
+    if( m_affec1 != nullptr){
+        m_affec1->traduitEnCPP(cout,0);//traduit la première affectation en C++
+    }
+    
     m_condition->traduitEnCPP(cout,0);// Traduit la condition en C++ sans décalage   
-    cout << ";";
-    m_affec2->traduitEnCPP(cout,0);//traduit la deuxième affectation en C++
-    cout << "){" <<endl;
+    
+    if( m_affec2 != nullptr){
+        m_affec2->traduitEnCPP(cout,0);//traduit la première affectation en C++
+    }
+    cout << ") {" << endl;
+    
     m_sequence->traduitEnCPP(cout, indentation+1);// Traduit en C++ la séquence avec indentation augmentée 
     cout << setw(4*indentation)<<""<<"}"<< endl;// Ecrit "}" avec l'indentation initiale et passe à la ligne 
 
