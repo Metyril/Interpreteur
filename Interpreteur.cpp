@@ -65,25 +65,31 @@ Noeud* Interpreteur::seqInst() {
 
 Noeud* Interpreteur::inst() {
   // <inst> ::= <affectation>  ; | <instSi>
-  if (m_lecteur.getSymbole() == "<VARIABLE>") {
-    Noeud *affect = affectation();
-    testerEtAvancer(";");
-    return affect;
-  }
-  else if (m_lecteur.getSymbole() == "si")
-    return instSiRiche();
-  // Compléter les alternatives chaque fois qu'on rajoute une nouvelle instruction
-  else if (m_lecteur.getSymbole() == "tantque")
-      return instTantQue();
-  else if (m_lecteur.getSymbole() == "repeter")
-      return instRepeter();
-  else if (m_lecteur.getSymbole() == "pour")
-      return instPour();
-  else if (m_lecteur.getSymbole() == "ecrire")
-      return instEcrire();
-  else {
-      erreur("Instruction incorrecte");
-      
+  try {
+    if (m_lecteur.getSymbole() == "<VARIABLE>") {
+      Noeud *affect = affectation();
+      testerEtAvancer(";");
+      return affect;
+    }
+    else if (m_lecteur.getSymbole() == "si")
+      return instSiRiche();
+    // Compléter les alternatives chaque fois qu'on rajoute une nouvelle instruction
+    else if (m_lecteur.getSymbole() == "tantque")
+        return instTantQue();
+    else if (m_lecteur.getSymbole() == "repeter")
+        return instRepeter();
+    else if (m_lecteur.getSymbole() == "pour")
+        return instPour();
+    else if (m_lecteur.getSymbole() == "ecrire")
+        return instEcrire();
+    else {
+        erreur("Instruction incorrecte");
+    }
+  } catch(SyntaxeException) {
+    while(m_lecteur.getSymbole() != "finproc" && m_lecteur.getSymbole() != "si" && m_lecteur.getSymbole() != "tantque" && m_lecteur.getSymbole() != "repeter" && m_lecteur.getSymbole() != "pour" && m_lecteur.getSymbole() != "lire") {
+        m_lecteur.avancer();
+    }
+    return nullptr;
   }
 }
 
