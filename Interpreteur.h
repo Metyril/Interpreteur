@@ -19,6 +19,8 @@ public:
 
 	inline const TableSymboles & getTable () const  { return m_table;    } // accesseur	
 	inline Noeud* getArbre () const { return m_arbre; }                    // accesseur
+        void traduitEnCPP(ostream & cout,unsigned int indentation) const;
+
 	
 private:
     Lecteur        m_lecteur;  // Le lecteur de symboles utilisé pour analyser le fichier
@@ -46,13 +48,11 @@ private:
     Noeud* instRepeter();   // <instRepeter> ::= repeter <seqInst> jusqua( <expression> )
     Noeud* instPour();      // <instPour>   ::=pour( [ <affectation> ] ; <expression> ;[ <affectation> ]) <seqInst> finpour
     Noeud* instSiRiche();   // <instSiRiche> ::= si ( <expression> ) <seqInst> {sinonsi ( <expression> ) <seqInst>} [sinon ( <expression> ) <seqInst>] finsi
-    Noeud* instEcrire();    // <instEcrire> ::=ecrire( <expression> | <chaine> {, <expression> | <chaine> })    
     Noeud* instLire();      // <instLire> ::= lire( <variable> {, <variable> })
+    Noeud* instEcrire();    // <instEcrire> ::=ecrire( <expression> | <chaine> {, <expression> | <chaine> })    
     
     
-    
-    
-    
+        
     
     
     
