@@ -86,7 +86,7 @@ Noeud* Interpreteur::inst() {
         erreur("Instruction incorrecte");
     }
   } catch(SyntaxeException) {
-    while(m_lecteur.getSymbole() != "finproc" && m_lecteur.getSymbole() != "si" && m_lecteur.getSymbole() != "tantque" && m_lecteur.getSymbole() != "repeter" && m_lecteur.getSymbole() != "pour" && m_lecteur.getSymbole() != "lire") {
+    while(m_lecteur.getSymbole() != "finproc" && m_lecteur.getSymbole() != "si" && m_lecteur.getSymbole() != "tantque" && m_lecteur.getSymbole() != "repeter" && m_lecteur.getSymbole() != "pour" && m_lecteur.getSymbole() != "lire" && m_lecteur.getSymbole() != "ecrire") {
         m_lecteur.avancer();
     }
     return nullptr;
