@@ -83,7 +83,7 @@ int NoeudOperateurBinaire::executer() {
 
 void NoeudOperateurBinaire::traduitEnCPP(ostream & cout,unsigned int indentation) const {
   m_operandeGauche->traduitEnCPP(cout,indentation);
-  cout << m_operateur;
+  cout << m_operateur.getChaine();
   m_operandeDroit->traduitEnCPP(cout, indentation);
   cout << setw(indentation)<<";"<< endl;
 }
@@ -244,6 +244,11 @@ NoeudChaine::NoeudChaine(Noeud* chaine)
 
 }
 
+void NoeudChaine::traduitEnCPP(ostream& cout, unsigned int indentation) const {
+    cout << ((SymboleValue *)m_chaine)->getChaine();
+}
+
+
 int NoeudChaine::executer() {
     /*if (typeid(*m_chaine)==typeid(SymboleValue) && *((SymboleValue*)m_chaine)== "<CHAINE>" ) {
         cout << ((SymboleValue *)m_chaine)->getChaine();
@@ -311,8 +316,9 @@ int NoeudInstEcrire::executer() {
 void NoeudInstEcrire::traduitEnCPP(ostream & cout, unsigned int indentation) const{
 
     for(int i =0; i<m_aecrire.size(); i++){
-        cout << setw(4*indentation)<<""<<"cout <<"; // Ecrit "cout <<" avec un décalage de 4*indentation espaces
-        cout << m_aecrire[i] << "<< endl;" << endl;
+        cout << setw(4*indentation)<<""<<"cout << "; // Ecrit "cout <<" avec un décalage de 4*indentation espaces
+        m_aecrire[i]->traduitEnCPP(cout, indentation);
+        cout << " << endl;" << endl;
     }
     
 }

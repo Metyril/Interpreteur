@@ -204,6 +204,7 @@ class NoeudChaine : public Noeud {
   public:
      NoeudChaine(Noeud* chaine); // construit une affectation
     ~NoeudChaine() {} // A cause du destructeur virtuel de la classe Noeud
+    void traduitEnCPP(ostream & cout, unsigned int indentation) const; //traduit la fonction ecrire en C++
     int executer();        // Exécute (évalue) l'expression et affecte sa valeur à la variable
 
   private:
