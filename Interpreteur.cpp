@@ -57,7 +57,7 @@ Noeud* Interpreteur::seqInst() {
   NoeudSeqInst* sequence = new NoeudSeqInst();
   do {
     sequence->ajoute(inst());
-  } while (m_lecteur.getSymbole() == "<VARIABLE>" || m_lecteur.getSymbole() == "si" || m_lecteur.getSymbole() == "tantque" || m_lecteur.getSymbole() == "repeter" || m_lecteur.getSymbole() == "pour" || m_lecteur.getSymbole() == "ecrire" );
+  } while (m_lecteur.getSymbole() == "<VARIABLE>" || m_lecteur.getSymbole() == "si" || m_lecteur.getSymbole() == "tantque" || m_lecteur.getSymbole() == "repeter" || m_lecteur.getSymbole() == "pour" || m_lecteur.getSymbole() == "lire" || m_lecteur.getSymbole() == "ecrire" );
   // Tant que le symbole courant est un début possible d'instruction...
   // Il faut compléter cette condition chaque fois qu'on rajoute une nouvelle instruction
   return sequence;
@@ -80,6 +80,8 @@ Noeud* Interpreteur::inst() {
         return instRepeter();
     else if (m_lecteur.getSymbole() == "pour")
         return instPour();
+    else if (m_lecteur.getSymbole() == "lire")
+        return instLire();
     else if (m_lecteur.getSymbole() == "ecrire")
         return instEcrire();
     else {
@@ -259,7 +261,29 @@ Noeud* Interpreteur::instSiRiche() {
     
     testerEtAvancer("finsi");
     return new NoeudInstSiRiche(conditions, sequences);
-}   
+}
+
+Noeud* Interpreteur::instLire() {
+    // <instLire> ::= lire( <variable> {, <variable> })
+    vector <Noeud* > variables;
+
+    testerEtAvancer("lire");
+    testerEtAvancer("(");
+    tester("<VARIABLE>");
+    Noeud* var = m_table.chercheAjoute(m_lecteur.getSymbole());
+    variables.push_back(var);
+    m_lecteur.avancer();
+    
+    while(m_lecteur.getSymbole() == ","){
+        testerEtAvancer(",");
+        tester("<VARIABLE>");
+        var = m_table.chercheAjoute(m_lecteur.getSymbole());
+        variables.push_back(var);
+        m_lecteur.avancer();
+    }
+    testerEtAvancer(")");
+    return new NoeudInstLire(variables);
+}
 
 Noeud* Interpreteur::instEcrire() {
     vector <Noeud* > aecrire;
