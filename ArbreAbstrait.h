@@ -73,6 +73,7 @@ class NoeudInstSi : public Noeud {
   public:
     NoeudInstSi(Noeud* condition, Noeud* sequence);
      // Construit une "instruction si" avec sa condition et sa séquence d'instruction
+    traduitEnCPP(ostream & cout, unsigned int indentation) const; //traduit la fonction ecrire en C++
    ~NoeudInstSi() {} // A cause du destructeur virtuel de la classe Noeud
     int executer();  // Exécute l'instruction si : si condition vraie on exécute la séquence
 
@@ -98,6 +99,7 @@ class NoeudInstTantQue : public Noeud {
   public:
     NoeudInstTantQue(Noeud* condition, Noeud* sequence);
      // Construit une "instruction tantque" avec sa condition et sa séquence d'instruction
+    traduitEnCPP(ostream & cout, unsigned int indentation) const; //traduit la fonction ecrire en C++
    ~NoeudInstTantQue() {} // A cause du destructeur virtuel de la classe Noeud
     int executer();  // Exécute l'instruction si : si condition vraie on exécute la séquence
 
@@ -114,6 +116,7 @@ class NoeudInstSiRiche : public Noeud {
   public:
     NoeudInstSiRiche(vector<Noeud* > conditions, vector<Noeud* > sequences);
      // Construit une "instruction si" avec sa condition et sa séquence d'instruction
+    traduitEnCPP(ostream & cout, unsigned int indentation) const; //traduit la fonction ecrire en C++
    ~NoeudInstSiRiche() {} // A cause du destructeur virtuel de la classe Noeud
     int executer();  // Exécute l'instruction si : si condition vraie on exécute la séquence
 
@@ -132,6 +135,7 @@ class NoeudInstRepeter : public Noeud {
   public:
     NoeudInstRepeter(Noeud* condition, Noeud* sequence);
      // Construit une "instruction repeter" avec sa condition et sa séquence d'instruction
+    traduitEnCPP(ostream & cout, unsigned int indentation) const; //traduit la fonction ecrire en C++
    ~NoeudInstRepeter() {} // A cause du destructeur virtuel de la classe Noeud
     int executer();  // Exécute l'instruction si : si condition vraie on exécute la séquence
 
@@ -147,6 +151,7 @@ class NoeudInstPour : public Noeud {
 //  et ses 2 fils : la condition du si et la séquence d'instruction associée
   public:
     NoeudInstPour(Noeud* condition, Noeud* sequence, Noeud* affect = nullptr, Noeud* affectation = nullptr);
+    traduitEnCPP(ostream & cout, unsigned int indentation) const; //traduit la fonction ecrire en C++
      // Construit une "instruction pour" avec sa condition et sa séquence d'instruction
    ~NoeudInstPour() {} // A cause du destructeur virtuel de la classe Noeud
     int executer();  // Exécute l'instruction si : si condition vraie on exécute la séquence
@@ -158,11 +163,14 @@ class NoeudInstPour : public Noeud {
     Noeud*  m_affec2;
 };
 
+
+
 ////////////////////////////////////////////////////////////////////////////////
 class NoeudInstLire : public Noeud {
 // Classe pour représenter un noeud "instruction lire"
   public:
     NoeudInstLire(vector<Noeud*> variables);
+    traduitEnCPP(ostream & cout, unsigned int indentation) const; //traduit la fonction ecrire en C++
      // Construit une "instruction repeter" avec sa condition et sa séquence d'instruction
    ~NoeudInstLire() {} // A cause du destructeur virtuel de la classe Noeud
     int executer();  // Exécute l'instruction lire
@@ -171,6 +179,8 @@ class NoeudInstLire : public Noeud {
     vector<Noeud*>  m_variables;
 };
 
+
+
 ////////////////////////////////////////////////////////////////////////////////
 class NoeudInstEcrire : public Noeud {
 // Classe pour représenter un noeud "instruction ecrire"
@@ -178,6 +188,7 @@ class NoeudInstEcrire : public Noeud {
   public:
     NoeudInstEcrire(vector<Noeud* > aecrire);
      // Construit une "instruction ecrire" avec sa condition et sa séquence d'instruction
+    traduitEnCPP(ostream & cout, unsigned int indentation) const; //traduit la fonction ecrire en C++
    ~NoeudInstEcrire() {} // A cause du destructeur virtuel de la classe Noeud
     int executer();  // Exécute l'instruction si : si condition vraie on exécute la séquence
 
