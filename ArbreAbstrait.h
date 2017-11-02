@@ -191,7 +191,7 @@ class NoeudInstLire : public Noeud {
      // Construit une "instruction repeter" avec sa condition et sa séquence d'instruction
    ~NoeudInstLire() {} // A cause du destructeur virtuel de la classe Noeud
     int executer();  // Exécute l'instruction lire
-    //void traduitEnCPP(ostream & cout, unsigned int indentation) const; //traduit la fonction ecrire en C++
+    void traduitEnCPP(ostream & cout, unsigned int indentation) const; //traduit la fonction ecrire en C++
 
   private:
     vector<Noeud*>  m_variables;
