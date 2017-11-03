@@ -1,0 +1,42 @@
+# Fichier de test
+# Les lignes de commentaires commencent par #
+
+procedure principale()
+  
+i = 14;
+  
+
+#Fonction si déjà intégré dans la partie donnée
+#Nous retestons le si car seul le siRiche est appelé
+
+si (i==14)
+    
+   j=3;
+  
+finsi
+
+
+#Test du Si Sinon
+
+si(i<14)
+   j=0;
+sinon
+   j=10;
+finsi
+
+#Test du Si SinonSi Sinon
+#Avec 2 SinonSi
+
+si(i==0)
+   j=1;
+sinonsi(i<14)
+   j=5;
+sinonsi(i>14)
+   j=20;
+sinon
+   j=100;
+finsi
+
+finproc
+
+# Commentaire Final 
