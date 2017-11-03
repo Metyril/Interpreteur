@@ -1,4 +1,4 @@
-# Fichier de test lire
+# Fichier de test
 # Les lignes de commentaires commencent par #
 procedure principale()
     lire(i,j,k)

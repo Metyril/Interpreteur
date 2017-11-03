@@ -12,7 +12,7 @@ public:
 	Symbole(const string & s = "");  // Construit le symbole à partir de la chaine (string) ch lue par le lecteur de symbole dans un fichier
 	bool operator == (const string & ch) const ; // Pour tester l'égalité entre le symbole et une chaîne
 	inline bool operator != (const string  & ch) const { return ! (*this == ch); } // Pour tester la différence...
-	inline const string & getChaine() const { return m_chaine;} // Accesseur
+	inline const string & getChaine() const {return m_chaine;} // Accesseur
 	friend ostream & operator <<(ostream & cout, const Symbole & symbole); // Fonction amie pour pouvoir afficher un symbole sur cout 
 
 private:

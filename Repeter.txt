@@ -1,4 +1,4 @@
-# Fichier de test repeter
+# Fichier de test tant que
 # Les lignes de commentaires commencent par #
 procedure principale()
 
