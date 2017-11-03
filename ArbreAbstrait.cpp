@@ -289,7 +289,7 @@ void NoeudInstLire::traduitEnCPP(ostream & cout, unsigned int indentation) const
 
     for(int i =0; i<m_variables.size(); i++){
         cout << setw(4*indentation)<<""<<"cin >> ";
-        m_variables[i]->traduitEnCPP(cout, indentation);
+        m_variables[i]->traduitEnCPP(cout, 0);
         if (i != m_variables.size()-1) {
             cout << ";" << endl;
         } else {
