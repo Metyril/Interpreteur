@@ -1,8 +1,0 @@
-# Fichier de test
-# Les lignes de commentaires commencent par #
-procedure principale()
-i=15;
-ecrire("hello")
-
-finproc
-# Commentaire Final
