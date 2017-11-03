@@ -1,4 +1,4 @@
-# Fichier de test
+# Fichier de test siriche
 # Les lignes de commentaires commencent par #
 
 procedure principale()
