@@ -3,11 +3,11 @@
 
 procedure principale()
   
-i = 14;
+i = 0;
   
 
-#Fonction si dÈj‡ intÈgrÈ dans la partie donnÈe
-#Nous retestons le si car seul le siRiche est appelÈ
+#Fonction si d√©j√† int√©gr√© dans la partie donn√©e
+#Nous retestons le si car seul le siRiche est appel√©
 
 si (i==14)
     
@@ -19,22 +19,22 @@ finsi
 #Test du Si Sinon
 
 si(i<14)
-   j=0;
+   k=0;
 sinon
-   j=10;
+   k=10;
 finsi
 
 #Test du Si SinonSi Sinon
 #Avec 2 SinonSi
 
 si(i==0)
-   j=1;
+   m=1;
 sinonsi(i<14)
-   j=5;
+   m=5;
 sinonsi(i>14)
-   j=20;
+   m=20;
 sinon
-   j=100;
+   m=100;
 finsi
 
 finproc

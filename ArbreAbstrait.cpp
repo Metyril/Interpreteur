@@ -45,9 +45,9 @@ int NoeudAffectation::executer() {
 
 void NoeudAffectation::traduitEnCPP(ostream & cout,unsigned int indentation) const {
   cout << setw(4*indentation)<<"";
-  m_variable->traduitEnCPP(cout,indentation);
+  m_variable->traduitEnCPP(cout,0);
   cout << "=";
-  m_expression->traduitEnCPP(cout, indentation);
+  m_expression->traduitEnCPP(cout, 0);
   cout << ";";
 }
 
@@ -234,7 +234,7 @@ void NoeudInstPour::traduitEnCPP(ostream& cout, unsigned int indentation) const 
     cout << ") {" << endl;
     
     m_sequence->traduitEnCPP(cout, indentation+1);// Traduit en C++ la séquence avec indentation augmentée 
-    cout << setw(4*indentation)<<""<<"}";// Ecrit "}" avec l'indentation initiale et passe à la ligne 
+    cout << setw(4*indentation)<<""<<"}"<<endl;// Ecrit "}" avec l'indentation initiale et passe à la ligne 
 
 }
 
@@ -322,11 +322,12 @@ int NoeudInstEcrire::executer() {
 }
 
 void NoeudInstEcrire::traduitEnCPP(ostream & cout, unsigned int indentation) const{
-
+    
+    cout << setw(4*indentation)<< ""<<"cout"; // Ecrit "cout <<" avec un décalage de 4*indentation espaces
     for(int i =0; i<m_aecrire.size(); i++){
-        cout << setw(4*indentation)<<""<<"cout << "; // Ecrit "cout <<" avec un décalage de 4*indentation espaces
-        m_aecrire[i]->traduitEnCPP(cout, indentation);
-        cout << " << endl;";
+        cout << " << ";
+        m_aecrire[i]->traduitEnCPP(cout, 0);
     }
+    cout << " << endl;" << endl;
     
 }

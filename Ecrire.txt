@@ -1,0 +1,17 @@
+# Fichier de test
+# Les lignes de commentaires commencent par #
+procedure principale()
+
+i=50;
+
+#ecrire une variable
+ecrire(i)
+
+#ecrire une chaine de caractères
+ecrire("Bonjour")
+
+#ecrire le résultat d'une affectation
+ecrire("i+10=", i+10)
+
+finproc
+# Commentaire Final
