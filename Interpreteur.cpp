@@ -82,7 +82,10 @@ Noeud* Interpreteur::seqInst() {
   NoeudSeqInst* sequence = new NoeudSeqInst();
   do {
     sequence->ajoute(inst());
-  } while (m_lecteur.getSymbole() == "<VARIABLE>" || m_lecteur.getSymbole() == "si" || m_lecteur.getSymbole() == "tantque" || m_lecteur.getSymbole() == "repeter" || m_lecteur.getSymbole() == "pour" || m_lecteur.getSymbole() == "lire" || m_lecteur.getSymbole() == "ecrire" );
+  } while (m_lecteur.getSymbole() == "<VARIABLE>" || m_lecteur.getSymbole() == "si" ||
+           m_lecteur.getSymbole() == "tantque" || m_lecteur.getSymbole() == "repeter" ||
+           m_lecteur.getSymbole() == "pour" || m_lecteur.getSymbole() == "lire" ||
+           m_lecteur.getSymbole() == "ecrire" || m_lecteur.getSymbole() == "selon");
   // Tant que le symbole courant est un début possible d'instruction...
   // Il faut compléter cette condition chaque fois qu'on rajoute une nouvelle instruction
   return sequence;
@@ -109,11 +112,16 @@ Noeud* Interpreteur::inst() {
         return instLire();
     else if (m_lecteur.getSymbole() == "ecrire")
         return instEcrire();
+    else if (m_lecteur.getSymbole() == "selon")
+        return instSelon();
     else {
         erreur("Instruction incorrecte");
     }
   } catch(SyntaxeException) {
-    while(m_lecteur.getSymbole() != "finproc" && m_lecteur.getSymbole() != "si" && m_lecteur.getSymbole() != "tantque" && m_lecteur.getSymbole() != "repeter" && m_lecteur.getSymbole() != "pour" && m_lecteur.getSymbole() != "lire" && m_lecteur.getSymbole() != "ecrire") {
+    while(m_lecteur.getSymbole() != "finproc" && m_lecteur.getSymbole() != "si" &&
+          m_lecteur.getSymbole() != "tantque" && m_lecteur.getSymbole() != "repeter" &&
+          m_lecteur.getSymbole() != "pour" && m_lecteur.getSymbole() != "lire" &&
+          m_lecteur.getSymbole() != "ecrire" && m_lecteur.getSymbole() != "selon") {
         m_lecteur.avancer();
     }
     return nullptr;
@@ -438,4 +446,38 @@ Noeud* Interpreteur::instEcrire() {
     
     testerEtAvancer(")");
     return new NoeudInstEcrire(aecrire);
+}
+
+
+
+Noeud* Interpreteur::instSelon() {
+    vector <Noeud*> expressions;
+    vector <Noeud*> sequences;
+    Noeud* variable;
+
+    //<instSelon> ::= selon ( <expBool> ) {cas <expBool> : <seqInst>} [defaut <seqInst>] finselon
+    testerEtAvancer("selon");
+    testerEtAvancer("(");
+    variable = expBool(); // On mémorise la condition
+    testerEtAvancer(")");
+    
+    while(m_lecteur.getSymbole() == "cas"){
+        testerEtAvancer("cas");
+        Noeud* exp = expBool(); // On mémorise la condition
+        expressions.push_back(exp);
+        testerEtAvancer(":");
+        Noeud* sequence = seqInst();     // On mémorise la séquence d'instruction
+        sequences.push_back(sequence);
+    }
+    
+    if(m_lecteur.getSymbole() == "defaut"){
+        testerEtAvancer("defaut");
+        testerEtAvancer(":");
+        expressions.push_back(nullptr);
+        Noeud* sequence = seqInst();     // On mémorise la séquence d'instruction
+        sequences.push_back(sequence);
+    }
+    
+    testerEtAvancer("finselon");
+    return new NoeudInstSelon(variable, expressions, sequences);
 }
