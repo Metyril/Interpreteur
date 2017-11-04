@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 using namespace std;
 #include "Interpreteur.h"
 #include "Exceptions.h"
@@ -24,8 +25,14 @@ int main(int argc, char* argv[]) {
     if (interpreteur.getArbre()!=nullptr) interpreteur.getArbre()->executer();
     // Et on vérifie qu'il a fonctionné en regardant comment il a modifié la table des symboles
     cout << endl << "================ Table des symboles apres exécution : " << interpreteur.getTable();
-    cout << endl << "================ Programme traduit en C++: " << endl;
+    
+    ofstream traduction;
+    traduction.open ("traduction.cpp");
+    interpreteur.traduitEnCPP(traduction,0);
+    traduction.close();
+    
     interpreteur.traduitEnCPP(cout,0);
+    
   } catch (InterpreteurException & e) {
     cout << e.what() << endl;
   }
