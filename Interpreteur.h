@@ -58,7 +58,7 @@ private:
     Noeud* instLire();      // <instLire> ::= lire( <variable> {, <variable> })
     Noeud* instEcrire();    // <instEcrire> ::=ecrire( <expression> | <chaine> {, <expression> | <chaine> })    
     
-    
+    Noeud* instSelon();
         
     
     
