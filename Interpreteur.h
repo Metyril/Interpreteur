@@ -34,6 +34,13 @@ private:
     Noeud*  affectation(); // <affectation> ::= <variable> = <expression> 
     Noeud*  expression();  //  <expression> ::= <facteur> { <opBinaire> <facteur> }
     Noeud*  facteur();     //     <facteur> ::= <entier>  |  <variable>  |  - <facteur>  | non <facteur> | ( <expression> )
+    
+    
+    Noeud*  terme();
+    Noeud*  expBool();
+    Noeud*  relationEt();
+    Noeud*  relation();
+                           //   <opRel> ::=   == | != | < | <= | > | >=
                            //   <opBinaire> ::= + | - | *  | / | < | > | <= | >= | == | != | et | ou
     Noeud*  instSi();      //      <instSi> ::= si ( <expression> ) <seqInst> finsi
     
