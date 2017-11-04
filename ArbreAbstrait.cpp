@@ -45,9 +45,9 @@ int NoeudAffectation::executer() {
 
 void NoeudAffectation::traduitEnCPP(ostream & cout,unsigned int indentation) const {
   cout << setw(4*indentation)<<"";
-  m_variable->traduitEnCPP(cout,0);
+  m_variable->traduitEnCPP(cout,indentation);
   cout << "=";
-  m_expression->traduitEnCPP(cout, 0);
+  m_expression->traduitEnCPP(cout, indentation);
   cout << ";";
 }
 
@@ -189,16 +189,16 @@ NoeudInstRepeter::NoeudInstRepeter(Noeud* condition, Noeud* sequence)
 int NoeudInstRepeter::executer() {
     do
         m_sequence->executer();
-    while (m_condition->executer());
+    while (!m_condition->executer());
   return 0; // La valeur renvoyée ne représente rien !
 }
 
 void NoeudInstRepeter::traduitEnCPP(ostream& cout, unsigned int indentation) const {
     cout << setw(4*indentation)<<""<<"do {"<<endl;// Ecrit "do" avec un décalage de 4*indentation espaces 
     m_sequence->traduitEnCPP(cout, indentation+1);// Traduit en C++ la séquence avec indentation augmentée 
-    cout << setw(4*indentation)<<""<<"} while (";
+    cout << setw(4*indentation)<<""<<"} while (!(";
     m_condition->traduitEnCPP(cout,0);// Traduit la condition en C++ sans décalage   
-    cout <<");";
+    cout <<"));";
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -230,11 +230,12 @@ void NoeudInstPour::traduitEnCPP(ostream& cout, unsigned int indentation) const 
     if( m_affec2 != nullptr){
         cout << ";";
         m_affec2->traduitEnCPP(cout,0);//traduit la première affectation en C++
+        cout << "\b";
     }
     cout << ") {" << endl;
     
     m_sequence->traduitEnCPP(cout, indentation+1);// Traduit en C++ la séquence avec indentation augmentée 
-    cout << setw(4*indentation)<<""<<"}"<<endl;// Ecrit "}" avec l'indentation initiale et passe à la ligne 
+    cout << setw(4*indentation)<<""<<"}";// Ecrit "}" avec l'indentation initiale et passe à la ligne 
 
 }
 
@@ -328,6 +329,6 @@ void NoeudInstEcrire::traduitEnCPP(ostream & cout, unsigned int indentation) con
         cout << " << ";
         m_aecrire[i]->traduitEnCPP(cout, 0);
     }
-    cout << " << endl;" << endl;
+    cout << " << endl;";
     
 }
