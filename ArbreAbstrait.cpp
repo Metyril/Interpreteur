@@ -332,3 +332,50 @@ void NoeudInstEcrire::traduitEnCPP(ostream & cout, unsigned int indentation) con
     cout << " << endl;";
     
 }
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+// NoeudInstSelon
+////////////////////////////////////////////////////////////////////////////////
+
+NoeudInstSelon::NoeudInstSelon(Noeud* variable, vector<Noeud*> expressions, vector<Noeud*> sequences)
+: m_variable(variable), m_expressions(expressions), m_sequences(sequences){
+
+}
+
+
+int NoeudInstSelon::executer() {
+    for(int i = 0; i < m_expressions.size(); i++){
+        if (m_expressions[i] != nullptr && m_expressions[i]->executer() == m_variable->executer()) {
+            m_sequences[i]->executer();
+            break;
+        } else {
+            m_sequences[m_sequences.size()-1]->executer();
+        }
+    }
+
+  return 0; // La valeur renvoyée ne représente rien !
+}
+
+void NoeudInstSelon::traduitEnCPP(ostream& cout, unsigned int indentation) const {
+    cout << setw(4*indentation)<<""<<"switch (";// Ecrit "if (" avec un décalage de 4*indentation espaces 
+    m_variable->traduitEnCPP(cout,0);// Traduit la condition en C++ sans décalage   
+    cout <<") {"<< endl;// Ecrit ") {" et passe à la ligne   
+
+    for(int i = 0; i < m_expressions.size(); i++){
+        if (m_expressions[i] != nullptr) {
+            cout << setw(4*(indentation+1)) << "" << "case ";// Ecrit "if (" avec un décalage de 4*indentation espaces 
+            m_expressions[i]->traduitEnCPP(cout,0);// Traduit la condition en C++ sans décalage   
+            cout <<" : {" << endl;// Ecrit ") {" et passe à la ligne   
+            m_sequences[i]->traduitEnCPP(cout, indentation+2);// Traduit en C++ la séquence avec indentation augmentée 
+            cout << setw(4*(indentation+2)) << "" << "break;" << endl;
+            cout << setw(4*(indentation+1)) << "" << "}" << endl; // Ecrit "}" avec l'indentation initiale et passe à la ligne
+        } else {
+            cout << setw(4*(indentation+1)) << "" << "default : ";
+            m_sequences[i]->traduitEnCPP(cout,0);
+        }
+    }
+    cout << setw(4*indentation) <<""<< "}";
+    
+}
