@@ -16,6 +16,8 @@ public:
 	  int  executer();         // exécute le SymboleValue (revoie sa valeur !)
 	  inline void setValeur(int valeur)    { this->m_valeur=valeur; m_defini=true;  } // accesseur
 	  inline bool estDefini()              { return m_defini;                       } // accesseur
+          
+          inline enum m_categorie getCategorie()    { return this->m_categorie;  } // accesseur
 
 	  friend ostream & operator << (ostream & cout, const SymboleValue & symbole); // affiche un symbole value sur cout
 
