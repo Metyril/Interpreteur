@@ -1,0 +1,18 @@
+# Test de ecrire
+# Résultats attendus :
+# test1 : 1 afiché
+# test2 : "Bonjour" affiché
+# test3 : "test + 1 = " 2 affiché
+
+
+procedure principale()
+
+	test = 1;
+
+	ecrire( test );
+
+	ecrire( "Bonjour" );
+
+	ecrire( "test + 1 = ", test + 1 );
+
+finproc
