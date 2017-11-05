@@ -414,6 +414,7 @@ Noeud* Interpreteur::instLire() {
         m_lecteur.avancer();
     }
     testerEtAvancer(")");
+    testerEtAvancer(";");
     return new NoeudInstLire(variables);
 }
 
@@ -445,6 +446,7 @@ Noeud* Interpreteur::instEcrire() {
     }
     
     testerEtAvancer(")");
+    testerEtAvancer(";");
     return new NoeudInstEcrire(aecrire);
 }
 
