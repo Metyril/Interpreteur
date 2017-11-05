@@ -46,7 +46,7 @@ int NoeudAffectation::executer() {
 void NoeudAffectation::traduitEnCPP(ostream & cout,unsigned int indentation) const {
   cout << setw(4*indentation)<<"";
   m_variable->traduitEnCPP(cout,indentation);
-  cout << "=";
+  cout << " = ";
   m_expression->traduitEnCPP(cout, indentation);
   cout << ";";
 }
@@ -85,7 +85,7 @@ int NoeudOperateurBinaire::executer() {
 
 void NoeudOperateurBinaire::traduitEnCPP(ostream & cout,unsigned int indentation) const {
   m_operandeGauche->traduitEnCPP(cout,indentation);
-  cout << m_operateur.getChaine();
+  cout << " " << m_operateur.getChaine() << " ";
   m_operandeDroit->traduitEnCPP(cout, indentation);
 }
 
@@ -278,7 +278,7 @@ NoeudInstLire::NoeudInstLire(vector<Noeud*> variables)
 int NoeudInstLire::executer() {
     int valeur;
     for(int i = 0; i < m_variables.size(); i++) {
-        cout << "Variable : ";
+        cout << ((SymboleValue*) m_variables[i])->getChaine() << " : ";
         cin >> valeur;
         cout << endl;
         ((SymboleValue*) m_variables[i])->setValeur(valeur);
@@ -312,7 +312,7 @@ int NoeudInstEcrire::executer() {
             //cout << m_sequence;
        if (typeid(*m_aecrire[i])==typeid(NoeudChaine)){
             m_aecrire[i]->executer();
-            cout <<" ";
+            cout << " ";
        }else {
             cout << (m_aecrire[i]->executer()) << " ";
        }
@@ -346,12 +346,14 @@ NoeudInstSelon::NoeudInstSelon(Noeud* variable, vector<Noeud*> expressions, vect
 
 
 int NoeudInstSelon::executer() {
+        
     for(int i = 0; i < m_expressions.size(); i++){
-        if (m_expressions[i] != nullptr && m_expressions[i]->executer() == m_variable->executer()) {
+        if(m_expressions[i] == nullptr) {
+            m_sequences[m_sequences.size()-1]->executer();
+            break;
+        } else if (m_expressions[i]->executer() == m_variable->executer()) {
             m_sequences[i]->executer();
             break;
-        } else {
-            m_sequences[m_sequences.size()-1]->executer();
         }
     }
 
