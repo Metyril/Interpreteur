@@ -223,7 +223,6 @@ class NoeudInstSelon : public Noeud {
     ~NoeudInstSelon() {} // A cause du destructeur virtuel de la classe Noeud
     void traduitEnCPP(ostream & cout, unsigned int indentation) const; //traduit la fonction selon en C++
     int executer();  // Exécute l'instruction si : si condition vraie on exécute la séquence
-    //void traduitEnCPP(ostream & cout, unsigned int indentation) const; //traduit la fonction ecrire en C++
 
   private:
     Noeud* m_variable;
