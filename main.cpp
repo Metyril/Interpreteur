@@ -26,11 +26,13 @@ int main(int argc, char* argv[]) {
     // Et on vérifie qu'il a fonctionné en regardant comment il a modifié la table des symboles
     cout << endl << "================ Table des symboles apres exécution : " << interpreteur.getTable();
     
+    // Ecriture du programme compilé dans un fichier
     ofstream traduction;
     traduction.open ("traduction.cpp");
     interpreteur.traduitEnCPP(traduction,0);
     traduction.close();
     
+    // Afichage dans la console de ce programme
     interpreteur.traduitEnCPP(cout,0);
     
   } catch (InterpreteurException & e) {
