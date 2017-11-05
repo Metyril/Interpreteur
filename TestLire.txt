@@ -1,0 +1,15 @@
+# Test de lire
+# Résultats attendus :
+# test1 != 0
+# (test2 && test3) != null
+
+
+procedure principale()
+
+	test1 = 0;
+
+	lire( test1 );
+
+	lire( test2, test3 );
+
+finproc
