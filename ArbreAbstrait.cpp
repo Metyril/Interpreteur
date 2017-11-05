@@ -83,7 +83,15 @@ int NoeudOperateurBinaire::executer() {
 
 void NoeudOperateurBinaire::traduitEnCPP(ostream & cout,unsigned int indentation) const {
     m_operandeGauche->traduitEnCPP(cout,indentation);
-    cout << " " << m_operateur.getChaine() << " ";
+    if (m_operateur.getChaine() == "et") {
+        cout << " && ";
+    } else if (m_operateur.getChaine() == "ou") {
+        cout << " || ";
+    } else if (m_operateur.getChaine() == "non") {
+        cout << " !";
+    } else {
+        cout << " " << m_operateur.getChaine() << " ";
+    }
     m_operandeDroit->traduitEnCPP(cout, indentation);
 }
 
