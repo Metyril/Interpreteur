@@ -1,0 +1,21 @@
+# Test de repeter
+# Résultats attendus :
+# test1 = 2
+# test2 = 1
+
+
+procedure principale()
+
+	test1 = 0;
+
+	repeter
+		test1 = test1 + 1;
+	jusqua( test1 == 2 )		# Equivalent de tantque( test1 != 2 )
+
+	test2 = 0;
+
+	repeter
+		test2 = test2 + 1;
+	jusqua( test1 != 0 )		# Equivalent de tantque( test2 == 0 )
+
+finproc
