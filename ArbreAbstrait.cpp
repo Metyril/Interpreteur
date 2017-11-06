@@ -201,9 +201,9 @@ void NoeudInstPour::traduitEnCPP(ostream& cout, unsigned int indentation) const 
     }
     
     m_condition->traduitEnCPP(cout,0);// Traduit la condition en C++ sans décalage   
+    cout << ";";
     
     if( m_affec2 != nullptr){
-        cout << ";";
         m_affec2->traduitEnCPP(cout,0);//traduit la première affectation en C++
         cout << "\b";
     }
