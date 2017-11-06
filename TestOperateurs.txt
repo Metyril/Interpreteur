@@ -1,0 +1,16 @@
+# Test de la priorité des opérateurs
+# Résultats attendus :
+# test1 = 3 et non 4
+# test2 = 1
+procedure principale()
+
+	test1 = 1 + 1 * 4 / 2;
+
+	test2 = 0;
+	test3 = 0;
+
+	si ( test2 + 1 != 0 ou 0 et test3 == 0)
+		test2 = 1;
+	finsi
+
+finproc
